@@ -21,6 +21,8 @@ Standalone worker that executes queued command runs from `sc_command_runs`.
    npm run dev
    ```
 
+Polling is configured with `COMMAND_RUN_POLL_CRON` (default every minute).
+
 ## Windows SYSTEM execution
 
 For elevated NT AUTHORITY\\SYSTEM execution, configure wrapper command:

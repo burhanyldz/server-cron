@@ -2,7 +2,7 @@ import { schedule } from 'node-cron';
 import { connectToDatabase } from './config/db.js';
 import { env } from './config/env.js';
 import { log } from './services/logger.js';
-import { processPendingCommandRuns } from './services/pull-request-processor.js';
+import { processPendingCommandRuns } from './services/command-run-processor.js';
 
 const bootstrap = async (): Promise<void> => {
   await connectToDatabase();
@@ -11,11 +11,11 @@ const bootstrap = async (): Promise<void> => {
 
   await processPendingCommandRuns();
 
-  schedule(env.pullRequestPollCron, async () => {
+  schedule(env.commandRunPollCron, async () => {
     await processPendingCommandRuns();
   });
 
-  log(`Command-run polling scheduled with cron: '${env.pullRequestPollCron}'`);
+  log(`Command-run polling scheduled with cron: '${env.commandRunPollCron}'`);
 };
 
 bootstrap().catch((error) => {
